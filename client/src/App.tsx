@@ -8,6 +8,7 @@ import AuthPage from "@/pages/auth-page";
 import EducationPage from "@/pages/education-page";
 import PeriodTrackerPage from "@/pages/period-tracker-page";
 import ResearchPage from "@/pages/research-page";
+import HealthAssessmentPage from "@/pages/health-assessment-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { AuthProvider } from "./hooks/use-auth";
 
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/auth" component={AuthPage} />
       <Route path="/education" component={EducationPage} />
       <Route path="/research" component={ResearchPage} />
+      <Route path="/health-assessment" component={HealthAssessmentPage} />
       <ProtectedRoute path="/period-tracker" component={PeriodTrackerPage} />
       <Route component={NotFound} />
     </Switch>

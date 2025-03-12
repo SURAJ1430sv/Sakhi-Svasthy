@@ -59,6 +59,11 @@ export default function Header() {
                   {t("research", language)}
                 </a>
               </Link>
+              <Link href="/health-assessment">
+                <a className={`text-neutral-700 hover:text-primary font-medium ${location === '/health-assessment' ? 'text-primary' : ''}`}>
+                  {t("healthAssessment", language)}
+                </a>
+              </Link>
               {user && (
                 <Link href="/period-tracker">
                   <a className={`text-neutral-700 hover:text-primary font-medium ${location === '/period-tracker' ? 'text-primary' : ''}`}>
@@ -122,6 +127,12 @@ export default function Header() {
                 <a className={`text-neutral-700 hover:text-primary font-medium ${location === '/research' ? 'text-primary' : ''}`} 
                   onClick={() => setMobileMenuOpen(false)}>
                   {t("research", language)}
+                </a>
+              </Link>
+              <Link href="/health-assessment">
+                <a className={`text-neutral-700 hover:text-primary font-medium ${location === '/health-assessment' ? 'text-primary' : ''}`} 
+                  onClick={() => setMobileMenuOpen(false)}>
+                  {t("healthAssessment", language)}
                 </a>
               </Link>
               {user && (
