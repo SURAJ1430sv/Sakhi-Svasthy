@@ -1,22 +1,30 @@
 import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Loader2 } from "lucide-react";
+import { 
+  Form, 
+  FormControl, 
+  FormDescription, 
+  FormField, 
+  FormItem, 
+  FormLabel, 
+  FormMessage 
+} from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import { Loader2 } from "lucide-react";
 import { t } from "@/lib/translations";
 import { 
-  healthAssessmentSchema, 
-  type HealthAssessmentInput,
-  type HealthAssessment 
+  HealthAssessmentInput, 
+  HealthAssessment, 
+  healthAssessmentSchema 
 } from "@shared/schema";
-import { useAuth } from "@/hooks/use-auth";
 
 interface HealthAssessmentFormProps {
   condition: "pcos" | "pcod" | "breast_cancer";
@@ -26,8 +34,8 @@ interface HealthAssessmentFormProps {
 
 export default function HealthAssessmentForm({ 
   condition, 
-  onComplete, 
-  language 
+  onComplete,
+  language
 }: HealthAssessmentFormProps) {
   const { toast } = useToast();
   const { user } = useAuth();
@@ -36,8 +44,16 @@ export default function HealthAssessmentForm({
   const getDefaultValues = () => {
     return {
       condition: condition,
-      age: 0,
-      responses: {},
+      age: 20, // Default age
+      responses: {
+        irregularPeriods: "",
+        weightGain: "",
+        excessiveHairGrowth: "",
+        familyHistory: "",
+        lumpInBreast: "",
+        breastPain: "",
+        additionalSymptoms: ""
+      }
     };
   };
 
@@ -69,6 +85,10 @@ export default function HealthAssessmentForm({
   });
 
   const onSubmit = (data: HealthAssessmentInput) => {
+    // Convert age value to number if it's a string
+    if (typeof data.age === 'string') {
+      data.age = parseInt(data.age, 10);
+    }
     assessmentMutation.mutate(data);
   };
 
@@ -84,13 +104,13 @@ export default function HealthAssessmentForm({
                 <FormLabel>{t("ageQuestion", language)}</FormLabel>
                 <FormControl>
                   <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    onValueChange={(value) => field.onChange(parseInt(value, 10))}
+                    defaultValue={field.value?.toString()}
                     className="flex flex-col space-y-1"
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="under_20" />
+                        <RadioGroupItem value="18" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("under20", language)}
@@ -98,7 +118,7 @@ export default function HealthAssessmentForm({
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="21_30" />
+                        <RadioGroupItem value="25" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("21to30", language)}
@@ -106,7 +126,7 @@ export default function HealthAssessmentForm({
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="31_40" />
+                        <RadioGroupItem value="35" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("31to40", language)}
@@ -114,7 +134,7 @@ export default function HealthAssessmentForm({
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="above_40" />
+                        <RadioGroupItem value="45" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("above40", language)}
@@ -234,7 +254,7 @@ export default function HealthAssessmentForm({
 
           <FormField
             control={form.control}
-            name="familyHistory"
+            name="responses.familyHistory"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>{t("familyHistoryQuestion", language)}</FormLabel>
@@ -281,13 +301,13 @@ export default function HealthAssessmentForm({
                 <FormLabel>{t("ageQuestion", language)}</FormLabel>
                 <FormControl>
                   <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    onValueChange={(value) => field.onChange(parseInt(value, 10))}
+                    defaultValue={field.value?.toString()}
                     className="flex flex-col space-y-1"
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="under_30" />
+                        <RadioGroupItem value="25" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("under30", language)}
@@ -295,7 +315,7 @@ export default function HealthAssessmentForm({
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="31_45" />
+                        <RadioGroupItem value="38" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("31to45", language)}
@@ -303,7 +323,7 @@ export default function HealthAssessmentForm({
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="46_60" />
+                        <RadioGroupItem value="55" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("46to60", language)}
@@ -311,7 +331,7 @@ export default function HealthAssessmentForm({
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="above_60" />
+                        <RadioGroupItem value="65" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         {t("above60", language)}
@@ -326,7 +346,7 @@ export default function HealthAssessmentForm({
 
           <FormField
             control={form.control}
-            name="lumpInBreast"
+            name="responses.lumpInBreast"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>{t("lumpInBreastQuestion", language)}</FormLabel>
@@ -357,7 +377,7 @@ export default function HealthAssessmentForm({
 
           <FormField
             control={form.control}
-            name="breastPain"
+            name="responses.breastPain"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>{t("breastPainQuestion", language)}</FormLabel>
@@ -394,7 +414,7 @@ export default function HealthAssessmentForm({
 
           <FormField
             control={form.control}
-            name="familyHistory"
+            name="responses.familyHistory"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>{t("familyHistoryQuestion", language)}</FormLabel>
