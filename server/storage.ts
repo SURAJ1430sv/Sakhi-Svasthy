@@ -93,10 +93,16 @@ export class DatabaseStorage implements IStorage {
 
   async createPeriodData(userId: number, data: InsertPeriodData): Promise<PeriodData> {
     try {
-      const [periodEntry] = await db.insert(periodData).values({
-        ...data,
+      // Create insert object with the correct fields
+      const insertData = {
         userId,
-      }).returning();
+        startDate: data.startDate,
+        endDate: data.endDate || null,
+        cycleLength: data.cycleLength || null,
+        symptoms: data.symptoms || null,
+      };
+      
+      const [periodEntry] = await db.insert(periodData).values(insertData).returning();
       return periodEntry;
     } catch (error) {
       console.error("Error creating period data:", error);
@@ -120,7 +126,7 @@ export class DatabaseStorage implements IStorage {
   async deletePeriodData(id: number): Promise<boolean> {
     try {
       const result = await db.delete(periodData).where(eq(periodData.id, id));
-      return result.rowCount > 0;
+      return result != null;
     } catch (error) {
       console.error("Error deleting period data:", error);
       return false;
@@ -152,10 +158,17 @@ export class DatabaseStorage implements IStorage {
 
   async createHealthAssessment(userId: number | null, data: InsertHealthAssessment): Promise<HealthAssessment> {
     try {
-      const [assessment] = await db.insert(healthAssessment).values({
-        ...data,
-        userId: userId || null,
-      }).returning();
+      // Create insert object with the correct fields
+      const insertData = {
+        age: data.age,
+        condition: data.condition,
+        responses: data.responses,
+        riskScore: data.riskScore,
+        recommendations: data.recommendations,
+        userId: userId
+      };
+      
+      const [assessment] = await db.insert(healthAssessment).values(insertData).returning();
       return assessment;
     } catch (error) {
       console.error("Error creating health assessment:", error);
