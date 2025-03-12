@@ -66,13 +66,13 @@ export default function HealthAssessmentForm({
     mutationFn: async (data: HealthAssessmentInput) => {
       const res = await apiRequest(
         "POST", 
-        "/api/health-assessment", 
+        "/api/health-assessments", 
         { ...data, anonymous: isAnonymous }
       );
       return await res.json();
     },
     onSuccess: (data: HealthAssessment) => {
-      queryClient.invalidateQueries({ queryKey: ["/api/health-assessment"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/health-assessments"] });
       onComplete(data);
     },
     onError: (error: Error) => {
