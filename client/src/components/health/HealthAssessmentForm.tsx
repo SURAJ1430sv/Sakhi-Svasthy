@@ -34,32 +34,11 @@ export default function HealthAssessmentForm({
   const [isAnonymous, setIsAnonymous] = useState(false);
   
   const getDefaultValues = () => {
-    if (condition === "pcos" || condition === "pcod") {
-      return {
-        conditionType: condition,
-        age: "",
-        irregularPeriods: "",
-        weightGain: "",
-        excessiveHairGrowth: "",
-        skinDarkening: "",
-        hairLoss: "",
-        pimples: "",
-        familyHistory: "",
-        additionalSymptoms: "",
-      };
-    } else {
-      return {
-        conditionType: condition,
-        age: "",
-        lumpInBreast: "",
-        breastPain: "",
-        nippleDischarge: "",
-        breastShapeChange: "",
-        familyHistory: "",
-        previousBiopsies: "",
-        additionalSymptoms: "",
-      };
-    }
+    return {
+      condition: condition,
+      age: 0,
+      responses: {},
+    };
   };
 
   const form = useForm<HealthAssessmentInput>({
@@ -150,7 +129,7 @@ export default function HealthAssessmentForm({
 
           <FormField
             control={form.control}
-            name="irregularPeriods"
+            name="responses.irregularPeriods"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>{t("irregularPeriodsQuestion", language)}</FormLabel>
@@ -187,7 +166,7 @@ export default function HealthAssessmentForm({
 
           <FormField
             control={form.control}
-            name="weightGain"
+            name="responses.weightGain"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>{t("weightGainQuestion", language)}</FormLabel>
@@ -224,7 +203,7 @@ export default function HealthAssessmentForm({
 
           <FormField
             control={form.control}
-            name="excessiveHairGrowth"
+            name="responses.excessiveHairGrowth"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>{t("excessiveHairGrowthQuestion", language)}</FormLabel>
@@ -461,7 +440,7 @@ export default function HealthAssessmentForm({
 
         <FormField
           control={form.control}
-          name="additionalSymptoms"
+          name="responses.additionalSymptoms"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("additionalSymptomsQuestion", language)}</FormLabel>
