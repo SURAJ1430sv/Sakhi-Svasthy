@@ -1,6 +1,17 @@
 # Sakhi-Svasthy
 Sakhi-Svasthy: A Women’s Digital Health Awareness Platform aimed at promoting awareness, education, and support regarding women’s health, hygiene, and wellness.
 
+# How to run 
+Step 1 : Download it into your device 
+Step 2 : Open it into code editor and open terminal of it
+Step 3 : Run this command in terminal "npm install"
+Step 4 : Then run "npm run dev"
+
+## Importent Notice ##
+Download postgresql for the database where your data is going to add and show it.
+ # In  .env file you have to make small change  you have to add your sql id link and sql password 
+Example : DATABASE_URL="postgresql://postgres:suraj@localhost:5432/sakhisvasthya"
+
 
 modules = ["nodejs-20", "bash", "web"]
 run = "npm run dev"
@@ -21,9 +32,9 @@ externalPort = 80
 runButton = "Project"
 
 [[workflows.workflow]]
-name = "Project"
+name = "Sakhi-Svasthy"
 mode = "parallel"
-author = "agent"
+author = "Suraj"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
