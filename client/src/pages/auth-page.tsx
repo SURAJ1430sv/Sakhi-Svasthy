@@ -13,6 +13,7 @@ import { z } from "zod";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { t } from "@/lib/translations";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const extendedRegisterSchema = insertUserSchema.extend({
   confirmPassword: z.string()
@@ -96,6 +97,14 @@ export default function AuthPage() {
                     </div>
                     
                     <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-4">
+                      {loginMutation.isError && (
+                        <Alert variant="destructive">
+                          <AlertTitle>{t("login", language)} failed</AlertTitle>
+                          <AlertDescription>
+                            {loginMutation.error?.message || "Login failed"}
+                          </AlertDescription>
+                        </Alert>
+                      )}
                       <div>
                         <Label htmlFor="login-username">{t("username", language)}</Label>
                         <Input 
@@ -148,6 +157,14 @@ export default function AuthPage() {
                     </div>
                     
                     <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
+                      {registerMutation.isError && (
+                        <Alert variant="destructive">
+                          <AlertTitle>{t("register", language)} failed</AlertTitle>
+                          <AlertDescription>
+                            {registerMutation.error?.message || "Registration failed"}
+                          </AlertDescription>
+                        </Alert>
+                      )}
                       <div>
                         <Label htmlFor="name">{t("name", language)}</Label>
                         <Input 
