@@ -12,13 +12,23 @@ Limited awareness of women’s health issues in rural and urban areas.
 Difficulty in accessing personalized healthcare resources.
 Lack of digital platforms combining education, tracking, and doctor consultation for women.
 
-## ✨ Key Features
+## ✨ Images and Key Features 
 
 User Authentication: Secure login & registration for personalized access.
+<img width="1568" height="829" alt="image" src="https://github.com/user-attachments/assets/cf19545e-4a3c-4435-a540-4cac753aa975" />
+
 Health Records Management: Track and manage health history easily.
+<img width="1570" height="861" alt="image" src="https://github.com/user-attachments/assets/c11d62a4-85bc-4e68-9d5e-914e14687acc" />
+
 Awareness Hub: Articles, blogs, and resources on women’s health & wellness.
+<img width="1544" height="909" alt="image" src="https://github.com/user-attachments/assets/3dca45ed-3322-4897-ac54-dc69e2e345ad" />
+
 Consultation Support: Option to connect with healthcare providers (extendable).
+<img width="1537" height="825" alt="image" src="https://github.com/user-attachments/assets/097e6536-b19c-4ccf-a4e4-91a4dbcaf0e6" />
+
 Responsive UI: Accessible on mobile and desktop for maximum usability.
+<img width="1616" height="907" alt="image" src="https://github.com/user-attachments/assets/5730f016-6c1a-4e4f-8230-a87045b566c2" />
+
 Community Features (Optional): Safe space for discussions and Q&A.
 
 ## 🛠️ Tech Stack
