@@ -80,7 +80,7 @@ Make sure you have the following installed:
 4. Set up your environment variables:
     Create a `.env` file inside the **server** folder and add:
     ```
-    MONGO_URI=your_mongodb_connection_string
+    DATABASE_URI=your_db_connection_string
     JWT_SECRET=your_secret_key
     PORT=5000
     ```
