@@ -33,46 +33,76 @@ Community Features (Optional): Safe space for discussions and Q&A.
 
 ## 🛠️ Tech Stack
 
-Frontend: HTML5, CSS3, JavaScript (can be extended with React/Bootstrap)
-Backend: Node.js, Express.js
-Database: MongoDB with Mongoose
-Authentication: JSON Web Tokens (JWT)
+## 🛠️ Tech Stack
+
+* **Frontend:** React.js (TypeScript), Tailwind CSS, Axios  
+* **Backend:** Node.js, Express.js  
+* **Database:** Neon db 
+* **Authentication:** JWT-based secure login system  
+* **APIs:** RESTful API integration  
+* **Version Control:** Git & GitHub  
+
+---
 
 ## 🚀 Getting Started
 
-To get a local copy up and running, please follow these simple steps.
+Follow these steps to set up **Sakhi-Svasthya** locally.
 
-## Installation & Setup
+### 🧩 Prerequisites
 
-Clone the repository
-git clone https://github.com/SURAJ1430sv/Sakhi-Svasthy.git
+Make sure you have the following installed:
+* Node.js (v18 or later)  
+* MongoDB (running locally or MongoDB Atlas)  
+* Git  
 
-Navigate to the project directory
-cd Sakhi-Svasthy
+---
 
-Install dependencies
-npm install
+### ⚙️ Installation
 
-Set up environment variables
-Create a .env file in the root of the project and add your configuration details:
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/SURAJ1430sv/ArogyaSakhi.git
+    ```
 
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=a_strong_secret_for_tokens
+2. Navigate to the project directory:
+    ```bash
+    cd ArogyaSakhi
+    ```
 
-Run the development server : npm run dev
+3. Install dependencies for both client and server:
+    ```bash
+    cd client
+    npm install
+    cd ../server
+    npm install
+    ```
 
-Your application should now be running on http://localhost:5000.
+4. Set up your environment variables:
+    Create a `.env` file inside the **server** folder and add:
+    ```
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_secret_key
+    PORT=5000
+    ```
 
-📄 License
-This project is licensed under the Apache-2.0 License. See the LICENSE file for more details.
+5. Start the development servers:
+    ```bash
+    # Backend
+    cd server
+    npm start
 
-# How to run 
-Step 1 : Download it into your device 
-Step 2 : Open it into code editor and open terminal of it
-Step 3 : Run this command in terminal "npm install"
-Step 4 : Then run "npm run dev"
+    # Frontend
+    cd ../client
+    npm run dev
+    ```
 
-## Importent Notice ##
-Download postgresql for the database where your data is going to add and show it.
+6. Open your browser and visit:
+    ```
+    http://localhost:5173
+    ```
+
+---
+
+## 📂 Project Structure
  # In  .env file you have to make small change  you have to add your sql id link and sql password 
 Example : DATABASE_URL="postgresql://postgres:suraj@localhost:5432/sakhisvasthya"
